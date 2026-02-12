@@ -1,0 +1,19 @@
+apiVersion: source.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: nginx
+      version: "15.x.x"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  values:
+    service:
+      type: ClusterIP
+    replicaCount: 2
